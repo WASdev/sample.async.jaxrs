@@ -1,0 +1,19 @@
+<server description="new server">
+
+    <!-- Enable features -->
+    <featureManager>
+    	<feature>concurrent-1.0</feature>
+        <feature>jaxrs-2.0</feature>
+        <feature>localConnector-1.0</feature>
+        <feature>ejbLite-3.2</feature>
+        <feature>cdi-1.2</feature>
+        <feature>jsonp-1.0</feature>
+    </featureManager>
+
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint httpPort="9081" httpsPort="9444" id="defaultHttpEndpoint"/>
+
+    <applicationMonitor updateTrigger="mbean"/>
+
+    <webApplication id="jaxrs-async" location="jaxrs-async.war" name="jaxrs-async"/>
+</server>
