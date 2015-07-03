@@ -15,5 +15,5 @@
 
     <applicationMonitor updateTrigger="mbean"/>
 
-    <webApplication id="jaxrs-async" location="jaxrs-async.war" name="jaxrs-async"/>
+    <webApplication id="async-jaxrs-application" location="async-jaxrs-application.war" name="async-jaxrs-application"/>
 </server>
