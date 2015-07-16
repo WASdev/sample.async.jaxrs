@@ -5,3 +5,4 @@
 /servers/*/apps
 /servers/*/logs
 /servers/*/workarea
+/servers/.classCache

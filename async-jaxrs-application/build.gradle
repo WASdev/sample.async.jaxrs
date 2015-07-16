@@ -1,9 +1,23 @@
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'maven-publish'
+apply plugin: 'liberty'
+
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.0-SNAPSHOT'
+    }
+}
 
 // Dependencies
 repositories { mavenCentral(); }
+
+sourceSets {
+    fvt
+}
 
 dependencies {
     compile group:'javax.ws.rs', name:'javax.ws.rs-api', version:'2.0'
@@ -11,6 +25,9 @@ dependencies {
     compile group:'javax.json', name:'javax.json-api', version:'1.0'
     compile group:'javax.enterprise', name:'cdi-api', version:'1.2'
     compile group:'javax.ejb', name:'javax.ejb-api', version:'3.2'
+    testCompile 'junit:junit:4.12'
+    fvtCompile configurations.testCompile
+    fvtRuntime configurations.testRuntime
 }
 
 sourceCompatibility = 1.7
@@ -45,3 +62,22 @@ publishing {
         }
     }
 }
+
+liberty {
+    wlpDir = 'C:/install/wlp/8556/GM/wlp'
+    serverName = 'jaxrsSample'
+    userDir = '../async-jaxrs-wlpcfg'
+    clean = true
+}
+
+task fvt(type: Test, dependsOn: jar) {
+    group 'Verification'
+    description 'Runs the functional verification tests.'
+    testClassesDir = sourceSets.fvt.output.classesDir
+    classpath = sourceSets.fvt.runtimeClasspath
+    dependsOn publishWar, libertyStart
+    finalizedBy libertyStop
+}
+
+check.dependsOn fvt
+
