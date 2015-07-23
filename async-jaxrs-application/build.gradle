@@ -6,11 +6,11 @@ apply plugin: 'maven-publish'
 repositories { mavenCentral(); }
 
 dependencies {
-    compile group:'javax.ws.rs', name:'javax.ws.rs-api', version:'2.0'
-    compile group:'javax.enterprise.concurrent', name:'javax.enterprise.concurrent-api', version:'1.0'
-    compile group:'javax.json', name:'javax.json-api', version:'1.0'
-    compile group:'javax.enterprise', name:'cdi-api', version:'1.2'
-    compile group:'javax.ejb', name:'javax.ejb-api', version:'3.2'
+    providedCompile group:'javax.ws.rs', name:'javax.ws.rs-api', version:'2.0'
+    providedCompile group:'javax.enterprise.concurrent', name:'javax.enterprise.concurrent-api', version:'1.0'
+    providedCompile group:'javax.json', name:'javax.json-api', version:'1.0'
+    providedCompile group:'javax.enterprise', name:'cdi-api', version:'1.2'
+    providedCompile group:'javax.ejb', name:'javax.ejb-api', version:'3.2'
 }
 
 sourceCompatibility = 1.7
