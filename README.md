@@ -10,13 +10,13 @@ Java EE7 added support for asynchronous request processing of REST requests in J
 
 ## Building with Gradle
 
-This sample can be build using [Gradle](http://gradle.org/).
+This sample can be built using [Gradle](http://gradle.org/). To do this update the async-jaxrs-application/gradle.properties file to set the libertyRoot property to point to a locally installed Liberty instance that will be used to run the tests against.
 
 ```bash
 $ gradle build publishToMavenLocal
 ```
 
-In addition to publishing the war to the local maven repository, the built war file is copied into the apps directory of the server configuration located in the async-jaxrs-wlpcfg directory:
+In addition to publishing the war to the local maven repository, the built war file is copied into the apps directory of the server configuration located in the async-jaxrs-wlpcfg directory and this is used while running the tests:
 
 ```text
 async-jaxrs-wlpcfg

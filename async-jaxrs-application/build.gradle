@@ -2,8 +2,30 @@ apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'maven-publish'
 
+// Use the Liberty Gradle plugin to run our functional tests
+apply plugin: 'liberty'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'Sonatype Nexus Snapshots'
+            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+    }
+    dependencies {
+        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.0-SNAPSHOT'
+        classpath files("${libertyRoot}/bin/tools/ws-server.jar")
+    }
+}
+
 // Dependencies
 repositories { mavenCentral(); }
+
+// Add a source set for doing functional tests against a running Liberty
+sourceSets {
+    fvt
+}
 
 dependencies {
     providedCompile group:'javax.ws.rs', name:'javax.ws.rs-api', version:'2.0'
@@ -11,6 +33,11 @@ dependencies {
     providedCompile group:'javax.json', name:'javax.json-api', version:'1.0'
     providedCompile group:'javax.enterprise', name:'cdi-api', version:'1.2'
     providedCompile group:'javax.ejb', name:'javax.ejb-api', version:'3.2'
+    testCompile 'junit:junit:4.12'
+    fvtCompile configurations.testCompile
+    fvtRuntime configurations.testRuntime
+    fvtRuntime 'org.apache.cxf:cxf-rt-rs-client:3.1.1'
+    fvtRuntime 'org.glassfish:javax.json:1.0.4'
 }
 
 sourceCompatibility = 1.7
@@ -45,3 +72,42 @@ publishing {
         }
     }
 }
+
+// Add a functional test task that runs during the 'check' phase that uses the Liberty Gradle plugin
+// to launch Liberty and run the test classes in the fvt source set
+task fvt(type: Test, dependsOn: jar) {
+    group 'Verification'
+    description 'Runs the functional verification tests.'
+    testClassesDir = sourceSets.fvt.output.classesDir
+    classpath = sourceSets.fvt.runtimeClasspath
+    systemProperties = ['liberty.test.port': getHttpPort()]
+    dependsOn publishWar, libertyStart
+    finalizedBy libertyStop
+}
+
+String getHttpPort() {
+    def DEFAULT_HTTP_PORT = 9081
+    def serverXmlFile = file(new File('../async-jaxrs-wlpcfg/servers/jaxrsSample/server.xml'))
+    println serverXmlFile.getAbsolutePath()
+    def portPattern = ~/.*httpPort="(\d+)".*/
+    serverXmlFile.eachLine { line -> 
+        def portMatcher = line =~ portPattern
+        if (portMatcher) {
+            return portMatcher.group(1)
+        }
+    }
+    return DEFAULT_HTTP_PORT
+}
+
+libertyStart.mustRunAfter publishWar
+
+liberty {
+    wlpDir = "${libertyRoot}"
+    serverName = 'jaxrsSample'
+    userDir = '../async-jaxrs-wlpcfg'
+    // Clean is only supported on the latest Liberty Gradle plugin which isn't on Maven yet
+//    clean = true
+}
+
+check.dependsOn fvt
+
