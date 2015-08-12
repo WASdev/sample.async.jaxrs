@@ -1,6 +1,6 @@
 * Control the server [directly from the command line](#running-on-the-command-line) for manual testing.
 * Use the [Gradle](#running-with-gradle) or [maven](#running-with-maven) to control and manipulate the server for use in automated builds to support continuous integration.
-* Use [Eclipse and WDT](#eclipse--wdt) for development in an IDE with live, incremental updates to your application without restarting the server
+* Use [Eclipse and WDT](/docs/Downloading-WAS-Liberty.md) for development in an IDE with live, incremental updates to your application without restarting the server
 
 ## Running on the command line
 
@@ -20,13 +20,13 @@ $ tail -f ${WLP_USER_DIR}/servers/jaxrsSample/logs/console.log
 
 ## Running with Gradle
 
-The [Gradle plugin](https://github.com/WASdev/ci.gradle) can manage the server using the following operations: 
+The [Gradle plugin](https://github.com/WASdev/ci.gradle) can manage the server using the following operations:
 
 * TODO: more here. I know, you're impatient. Stop gnashing your teeth at me.
 
 ## Running with maven
 
-The [maven plugin](https://github.com/WASdev/ci.maven) can manage the server using the following operations: 
+The [maven plugin](https://github.com/WASdev/ci.maven) can manage the server using the following operations:
 
 * TODO: more here. I know, you're impatient. Stop gnashing your teeth at me.
 

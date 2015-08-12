@@ -32,3 +32,4 @@ $ mvn install
 ## Next step
 
 [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
+
