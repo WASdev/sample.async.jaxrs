@@ -78,6 +78,7 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
    The default name for this server can vary, you might also opt to rename it from the Right-click menu in the Servers view to make it easier to identify.
 6. Click *Finish*
 
+
 #### Running Liberty and the sample application from WDT
 
 1.  Select the `async-jaxrs-application` project
@@ -85,8 +86,7 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
 3.  Select the appropriate server (as created above) and select *Finish*
 4.  Confirm web browser opens on "http://localhost:9081/jaxrs/" with 5 hyperlinks to run samples
 
-* Note: Some versions of WDT incorrectly map the cdi-1.2 dependency to the CDI 1.0 Facet, which prevents the *Run As ...* operation in step 2 from succeeding. If this happens, Right-click on the `async-jaxrs-application` project, and select *Properties*, then select *Project Facets* in the left-hand pane. Change the the "Context and dependency injection (CDI)" facet to use version 1.2, at which point, step 2 (above) should work.
-
+:star: *Note:* Some versions of WDT incorrectly map the cdi-1.2 dependency to the CDI 1.0 Facet, which prevents the *Run As ...* operation in step 2 from succeeding. If this happens, Right-click on the `async-jaxrs-application` project, and select *Properties*, then select *Project Facets* in the left-hand pane. Change the the "Context and dependency injection (CDI)" facet to use version 1.2, at which point, step 2 (above) should work.
 
 ## Tips
 
