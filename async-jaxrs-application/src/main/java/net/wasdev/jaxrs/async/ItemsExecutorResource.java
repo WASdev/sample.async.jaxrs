@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2015 IBM Corp.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 package net.wasdev.jaxrs.async;
 
 import java.util.Collection;
@@ -21,11 +36,26 @@ public class ItemsExecutorResource {
     
     ItemService itemService = new ItemService();
 
+    /**
+     * JNDI lookup for the ManagedExecutorService from EE7 Concurrency
+     * Utilities.
+     * 
+     * @return the default ManagedExecutorService
+     * @throws NamingException
+     */
     private ExecutorService getExecutor() throws NamingException {
         return (ExecutorService) new InitialContext()
                  .lookup("java:comp/DefaultManagedExecutorService");
     }
     
+    /**
+     * Use the ManagedExecutorService to queue request processing to a 
+     * different thread
+     * 
+     * @param ar AsyncResponse object that is used to resume the request (re-associate the connection with the thread) 
+     *           in order to send the response.
+     * @return null to allow the method to return immediately: any other result is sent via {@link AsyncResponse#resume(Object)}
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public void getItems(@Suspended final AsyncResponse ar) {
@@ -39,7 +69,7 @@ public class ItemsExecutorResource {
 
         try {
             ExecutorService executor = getExecutor();
-            System.out.println("execitems: " + executor);
+            System.out.println("execitems:  Submitting to " + executor);
             executor.submit(r);
         } catch (NamingException e) {
             r.run();

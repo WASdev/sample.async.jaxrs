@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2015 IBM Corp.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
 package net.wasdev.jaxrs.async;
 
 import java.util.Collection;
@@ -17,9 +32,16 @@ import javax.ws.rs.core.Response;
 
 @Stateless
 @Path("ejbitems")
-public class ItemEJBResource {   
+public class ItemsEJBResource {   
     ItemService itemService = new ItemService();
 
+    /**
+     * By making this a stateless EJB and using the @Asynchronous annotation,
+     * we'll be on a different thread before this method is invoked.
+     *
+     * @param ar AsyncResponse object that is used to resume the request (re-associate the connection with the thread) 
+     *           in order to send the response.
+     */
     @GET
     @Asynchronous
     @Produces(MediaType.APPLICATION_JSON)

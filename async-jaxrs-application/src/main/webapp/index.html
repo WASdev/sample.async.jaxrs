@@ -2,10 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JAX-RS 2.0 Examples</title>
 </head>
 <body>
-Hello
+<p>Here are some sample services that can illustrate how JAX-RS works with and without async behaviors. In all cases, 
+the client (this browser window) is making synchronous requests to the server. Click a link, count to two, and the
+response will come back. We could make it fancier, but this sample isn't really about the client side behavior.</p>
+<p>The interesting activity is in the server, and is best observed by watching the output of the server (the console window of WDT, or 
+standard out or console.log).</p>
 <ul>
 <li><a href="/jaxrs-async/rest/items">Items</a></li>
 <li><a href="/jaxrs-async/rest/asyncitems">Async Items</a></li>
@@ -13,7 +17,7 @@ Hello
 <li><a href="/jaxrs-async/rest/execitems">Async Items with Executor</a></li>
 <li><a href="/jaxrs-async/rest/cdiexecitems">Async Items with CDI-provided Executor</a></li>
 </ul>
-Timeouts
+<p>Samples with timeouts</p>
 <ul>
 <li><a href="/jaxrs-async/rest/ejbitemsTimeout">Async EJB Items with Timeout</a></li>
 <li><a href="/jaxrs-async/rest/cdiexecitemsTimeout">Async Items with CDI-provided Executor and Timeout</a></li>
