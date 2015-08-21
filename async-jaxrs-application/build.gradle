@@ -22,11 +22,6 @@ buildscript {
 // Dependencies
 repositories { mavenCentral(); }
 
-// Add a source set for doing functional tests against a running Liberty
-sourceSets {
-    fvt
-}
-
 dependencies {
     providedCompile group:'javax.ws.rs', name:'javax.ws.rs-api', version:'2.0'
     providedCompile group:'javax.enterprise.concurrent', name:'javax.enterprise.concurrent-api', version:'1.0'
@@ -34,10 +29,8 @@ dependencies {
     providedCompile group:'javax.enterprise', name:'cdi-api', version:'1.2'
     providedCompile group:'javax.ejb', name:'javax.ejb-api', version:'3.2'
     testCompile 'junit:junit:4.12'
-    fvtCompile configurations.testCompile
-    fvtRuntime configurations.testRuntime
-    fvtRuntime 'org.apache.cxf:cxf-rt-rs-client:3.1.1'
-    fvtRuntime 'org.glassfish:javax.json:1.0.4'
+    testRuntime 'org.apache.cxf:cxf-rt-rs-client:3.1.1'
+    testRuntime 'org.glassfish:javax.json:1.0.4'
 }
 
 sourceCompatibility = 1.7
@@ -78,11 +71,20 @@ publishing {
 task fvt(type: Test, dependsOn: jar) {
     group 'Verification'
     description 'Runs the functional verification tests.'
-    testClassesDir = sourceSets.fvt.output.classesDir
-    classpath = sourceSets.fvt.runtimeClasspath
+    reports.html.destination = file("$buildDir/reports/fvt")
+    reports.junitXml.destination = file("$buildDir/test-results/fvt")
+    include '**/fvt/**'
+    exclude '**/unit/**'
     systemProperties = ['liberty.test.port': getHttpPort()]
     dependsOn publishWar, libertyStart
     finalizedBy libertyStop
+}
+
+test {
+	reports.html.destination = file("$buildDir/reports/unit")
+	reports.junitXml.destination = file("$buildDir/test-results/unit")
+	include '**/unit/**'
+	exclude '**/fvt/**'
 }
 
 String getHttpPort() {
