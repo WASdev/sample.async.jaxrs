@@ -1,4 +1,4 @@
-package fvt.net.wasdev.jaxrs.async.test;
+package net.wasdev.jaxrs.async.fvt.test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

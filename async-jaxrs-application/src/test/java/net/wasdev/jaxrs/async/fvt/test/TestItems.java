@@ -1,4 +1,4 @@
-package fvt.net.wasdev.jaxrs.async.test;
+package net.wasdev.jaxrs.async.fvt.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

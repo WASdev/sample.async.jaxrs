@@ -1,4 +1,4 @@
-package unit.net.wasdev.jaxrs.async.test;
+package net.wasdev.jaxrs.async.unit.test;
 
 import static org.junit.Assert.*;
 
