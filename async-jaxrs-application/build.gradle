@@ -15,7 +15,9 @@ buildscript {
     }
     dependencies {
         classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.0-SNAPSHOT'
-        classpath files("${libertyRoot}/bin/tools/ws-server.jar")
+        if (hasProperty('libertyRoot')) {
+            classpath file("${libertyRoot}/bin/tools/ws-server.jar")
+        }
     }
 }
 
@@ -90,7 +92,6 @@ test {
 String getHttpPort() {
     def DEFAULT_HTTP_PORT = 9081
     def serverXmlFile = file(new File('../async-jaxrs-wlpcfg/servers/jaxrsSample/server.xml'))
-    println serverXmlFile.getAbsolutePath()
     def portPattern = ~/.*httpPort="(\d+)".*/
     serverXmlFile.eachLine { line -> 
         def portMatcher = line =~ portPattern
@@ -104,12 +105,15 @@ String getHttpPort() {
 libertyStart.mustRunAfter publishWar
 
 liberty {
-    wlpDir = "${libertyRoot}"
+    wlpDir = hasProperty('libertyRoot') ? "${libertyRoot}" : null
     serverName = 'jaxrsSample'
     userDir = '../async-jaxrs-wlpcfg'
     // Clean is only supported on the latest Liberty Gradle plugin which isn't on Maven yet
 //    clean = true
 }
 
-check.dependsOn fvt
-
+if (hasProperty('libertyRoot') && file("${libertyRoot}").exists() && file("${libertyRoot}/lib/ws-launch.jar").exists()) {
+    check.dependsOn fvt
+} else {
+    logger.error('Unable to run integration tests because the libertyRoot property is not set to a directory that contains the /lib/ws-launch.jar file.  Set it in async-jaxrs-application/gradle.properties to your Liberty installation.')
+}
