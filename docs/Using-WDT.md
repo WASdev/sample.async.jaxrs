@@ -25,15 +25,18 @@ If the sample git repository hasn't been cloned yet, WDT has git tools integrate
 
 ### Import Gradle projects into WDT
 
-This assumes you have the Gradle IDE tools installed into Eclipse.
+This assumes you have the Gradle [Buildship](https://projects.eclipse.org/projects/tools.buildship) tools installed into Eclipse Mars.
 
 1. In the Git Repository view, expand the jaxrs repo to see the "Working Directory" folder
-2.  Right-click on this folder, and select *Copy path to Clipboard*
-3.  Select menu *File -> Import -> Gradle -> Gradle Project*
-4.  In the Root folder textbox, Paste in the repository directory.
-5. Click *Build Model* 
-6. Select all the projects (there should be three) and click *Finish*
-7.  This will create 3 projects in Eclipse: async-jaxrs, async-jaxrs-application, and async-jaxrs-wlpcfg
+2. Right-click on this folder, and select *Copy path to Clipboard*
+3. Select menu *File -> Import -> Gradle -> Gradle Project*
+4. In the *Project root directory* folder textbox, Paste in the repository directory.
+5. Click *Next* twice
+6. Three projects should be listed in the *Gradle project structure* click *Finish*
+7. This will create 3 projects in Eclipse: sample.async.jaxrs, async-jaxrs-application, and async-jaxrs-wlpcfg
+8. Go to the *Gradle Tasks* view in Eclipse and navigate to the *sample.async.jaxrs* project
+9. Double click on the *eclipse* task to generate all the Eclipse files
+10. In the *Enterprise Explorer* view in Eclipse right click on the three projects mentioned in step 7 and click refresh
 
 :star: *Note:* If you did not use Eclipse/WDT to clone the git repository, follow from step 3, but navigate to the cloned repository directory rather than pasting its name in step 4.
 
