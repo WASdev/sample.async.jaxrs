@@ -21,6 +21,8 @@ This sample can be built using [Gradle](http://gradle.org/).
 $ gradle build publishToMavenLocal
 ```
 
+If you want to also run the functional verification tests then you need to set the libertyRoot property in the async-jaxrs-application/gradle.properties file to point to a Liberty install.
+
 ## Building with maven
 
 This sample can be built using [Apache Maven](http://maven.apache.org/).
@@ -28,6 +30,8 @@ This sample can be built using [Apache Maven](http://maven.apache.org/).
 ```bash
 $ mvn install
 ```
+
+If you want to also run the functional verification tests then you need to set the install.directory property in the async-jaxrs-application/pom.xml file to point to a Liberty install.
 
 ## Next step
 
