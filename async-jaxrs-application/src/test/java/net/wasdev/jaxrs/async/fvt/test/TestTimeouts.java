@@ -19,7 +19,7 @@ public class TestTimeouts extends EndpointTest {
     /**
      * @return The endpoints that are expected to return a timeout message
      */
-    @Parameters
+    @Parameters(name="{0}")
     public static Collection<String> endpoints() {
         List<String> endpoints = new ArrayList<>();
         endpoints.add("ejbitemsTimeout");
