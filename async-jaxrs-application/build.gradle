@@ -105,7 +105,7 @@ String getHttpPort() {
 libertyStart.mustRunAfter publishWar
 
 liberty {
-    wlpDir = hasProperty('libertyRoot') ? "${libertyRoot}" : null
+    wlpDir = owner.hasProperty('libertyRoot') ? "${libertyRoot}" : null
     serverName = 'jaxrsSample'
     userDir = '../async-jaxrs-wlpcfg'
     // Clean is only supported on the latest Liberty Gradle plugin which isn't on Maven yet

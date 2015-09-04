@@ -28,7 +28,7 @@ public class TestItems extends EndpointTest {
     /**
      * @return The endpoints that are expected to return a pair of items
      */
-    @Parameters
+    @Parameters(name="{0}")
     public static Collection<String> endpoints() {
         List<String> endpoints = new ArrayList<>();
         endpoints.add("items");
