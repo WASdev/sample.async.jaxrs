@@ -27,6 +27,13 @@
         <developerConnection>scm:git@github.com:WASdev/sample.async.jaxrs.git</developerConnection>
         <url>git@github.com:WASdev/sample.async.jaxrs.git</url>
     </scm>
+    
+    <properties>
+        <!-- Update this to match the port number in the websocketSample server.xml
+        This is needed to run the tests -->
+        <libertyTestPort>9081</libertyTestPort>
+        <skipFVT>true</skipFVT>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -56,20 +63,20 @@
                 <version>3.2</version>
             </dependency>
             <dependency>
-            	<groupId>junit</groupId>
-            	<artifactId>junit</artifactId>
-            	<version>4.12</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
             </dependency>
             <dependency>
-		       	<groupId>org.apache.cxf</groupId>
-		       	<artifactId>cxf-rt-rs-client</artifactId>
-		       	<version>3.1.1</version>
-        	</dependency>
-        	<dependency>
-		       	<groupId>org.glassfish</groupId>
-		       	<artifactId>javax.json</artifactId>
-		       	<version>1.0.4</version>
-        	</dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-rs-client</artifactId>
+                <version>3.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.json</artifactId>
+                <version>1.0.4</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -100,37 +107,43 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-       	    <groupId>junit</groupId>
-           	<artifactId>junit</artifactId>
-           	<scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-        	<groupId>org.apache.cxf</groupId>
-        	<artifactId>cxf-rt-rs-client</artifactId>
-        	<scope>test</scope>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-        	<groupId>org.glassfish</groupId>
-        	<artifactId>javax.json</artifactId>
-        	<scope>test</scope>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-    
-    <properties>
-    	<!-- Update this to point to a liberty server install
-        This is needed to find the dependencies to build the code and to run the tests -->
-		<install.directory></install.directory>
-		<!-- Update this to match the port number in the JaxrsSample server.xml
-		This is needed to run the tests -->
-		<liberty.test.port.property>9081</liberty.test.port.property>
-	</properties>
+
+    <pluginRepositories>
+        <!-- Configure Sonatype OSS Maven snapshots repository-->
+        <pluginRepository>
+        <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
+                <version>2.6</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -162,85 +175,112 @@
             </plugin>
             <!-- Enable liberty-maven plugin so that we can start and stop a server before running tests -->
             <plugin>
-            	<groupId>net.wasdev.wlp.maven.plugins</groupId>
-            	<artifactId>liberty-maven-plugin</artifactId>
-            	<version>1.0</version>
-            	<executions>
-            		<execution>
-            			<id>start-server</id>
-            			<phase>pre-integration-test</phase>
-            			<goals>
-            				<goal>start-server</goal>
-            			</goals>
-            			<configuration>
-            				<configFiles>${basedir}/../async-jaxrs-wlpcfg/servers/jaxrsSample/server.xml</configFiles>
-            			</configuration>
-            		</execution>
-            		<execution>
-            			<id>stop-server</id>
-            			<phase>post-integration-test</phase>
-            			<goals>
-            				<goal>stop-server</goal>
-            			</goals>
-            		</execution>
-            	</executions>
-            	<configuration>
-       				<installDirectory>${install.directory}</installDirectory>
-       				<serverName>jaxrsSample</serverName>
-       				<userDirectory>${basedir}/../async-jaxrs-wlpcfg</userDirectory>
-            	</configuration>
+                <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>1.1-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>start-server</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start-server</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipFVT}</skip>
+                            <configFiles>${basedir}/../async-jaxrs-wlpcfg/servers/jaxrsSample/server.xml</configFiles>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-server</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop-server</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipFVT}</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <installDirectory>${libertyBaseDir}</installDirectory>
+                    <serverName>jaxrsSample</serverName>
+                    <userDirectory>${basedir}/../async-jaxrs-wlpcfg</userDirectory>
+                </configuration>
             </plugin>
             <!-- Plugin to run functional tests -->
             <plugin>
-            	<groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-failsafe-plugin</artifactId>
-            	<version>2.18.1</version>
-            	<executions>
-            		<execution>
-            			<phase>integration-test</phase>
-            			<id>integration-test</id>
-            			<goals>
-            				<goal>integration-test</goal>
-            			</goals>
-            			<configuration>
-            			    <includes>
-           						<include>**/fvt/**</include>
-           					</includes>
-           					<excludes>
-           						<exclude>**/unit/**</exclude>
-           					</excludes>
-           					<systemPropertyVariables>
-		   						<liberty.test.port>${liberty.test.port.property}</liberty.test.port>
-		      				</systemPropertyVariables>
-            			</configuration>
-            		</execution>
-            	</executions>
-      	        <configuration>
-      				<summaryFile>${project.build.directory}/test-reports/fvt/failsafe-summary.xml</summaryFile>
-      				<reportsDirectory>${project.build.directory}/test-reports/fvt</reportsDirectory>
-      			</configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/fvt/**</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/unit/**</exclude>
+                            </excludes>
+                            <systemPropertyVariables>
+                                <liberty.test.port>${libertyTestPort}</liberty.test.port>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>verify-tests</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>${skipFVT}</skip>
+                    <summaryFile>${project.build.directory}/test-reports/fvt/failsafe-summary.xml</summaryFile>
+                    <reportsDirectory>${project.build.directory}/test-reports/fvt</reportsDirectory>
+                </configuration>
             </plugin>
             <!-- Plugin to run unit tests -->
             <plugin>
-            	<groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-surefire-plugin</artifactId>
-            	<version>2.18.1</version>
-            	<executions>
-            		<execution>
-            			<phase>test</phase>
-            			<id>default-test</id>
-            			<configuration>
-           					<includes>
-           						<include>**/unit/**</include>
-           					</includes>
-           					<excludes>
-           						<exclude>**/fvt/**</exclude>
-           					</excludes>
-           					<reportsDirectory>${project.build.directory}/test-reports/unit</reportsDirectory>
-            			</configuration>
-            		</execution>
-            	</executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <id>default-test</id>
+                        <configuration>
+                            <includes>
+                                <include>**/unit/**</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/fvt/**</exclude>
+                            </excludes>
+                            <reportsDirectory>${project.build.directory}/test-reports/unit</reportsDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
+    
+    <profiles>
+        <profile>
+            <id>check-liberty-present</id>
+            <activation>
+                <file>
+                    <exists>${libertyRoot}/lib/ws-launch.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <skipFVT>false</skipFVT>
+                <libertyBaseDir>${libertyRoot}</libertyBaseDir>
+            </properties>
+        </profile>
+    </profiles>
 </project>
+
