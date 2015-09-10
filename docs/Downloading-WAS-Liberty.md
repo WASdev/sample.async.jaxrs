@@ -16,8 +16,3 @@ There are a few options to choose from (especially for the beta drivers). Choose
 ## Tips
 
 * If you use bash, consider trying the [command line tools](https://github.com/WASdev/util.bash.completion), which provide tab-completion for the server and other commands.
-
-## Next step
-
-* [Start the server using the command line, or Maven/Gradle plugins](/docs/Starting-the-server.md), or
-* [Start the server using Eclipse and WebSphere Devlopment Tools (WDT)](/docs/Using-WDT.md)

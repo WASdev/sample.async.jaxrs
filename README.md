@@ -15,14 +15,12 @@ This sample contains a few variations to illustrate how to use async request pro
 * *Async with CDI-provided Executor and Timeout*: [ItemsCDIExecutorResourceTimeout](/async-jaxrs-application/src/main/java/net/wasdev/jaxrs/async/ItemsCDIExecutorResourceTimeout.java) sets a timeout, and registers a timeout handler, a connection callback, and a completion callback. Work is queued to a separate thread via a CDI-injected ManagedExecutorService.
 * *Async EJB Items with Timeout*: [ItemsEJBResourceTimeout](/async-jaxrs-application/src/main/java/net/wasdev/jaxrs/async/ItemsEJBResourceTimeout.java) does the same as the previous example, but uses an asynchronous Stateless EJB instead.
 
-
+## Getting Started
 
 Browse the code to see what it does, or build and run it yourself:
-* [Building with Gradle](/docs/Building-the-sample.md#building-with-gradle)
-* [Building with maven](/docs/Building-the-sample.md#building-with-maven)
+* [Building and running on the command line](/docs/Using-cmd-line.md)
+* [Building and running using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 * [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
-* [Start the server using the command line, or maven/gradle plugins](/docs/Starting-the-server.md)
-* [Using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 
 Once the server has been started, go to [http://localhost:9081/jaxrs-async/](http://localhost:9081/jaxrs-async/) to interact with the sample.
 
