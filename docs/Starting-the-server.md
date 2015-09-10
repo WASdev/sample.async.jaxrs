@@ -1,22 +1,4 @@
-* Control the server [directly from the command line](#running-on-the-command-line) for manual testing.
-* Use the [Gradle](#running-with-gradle) or [maven](#running-with-maven) to control and manipulate the server for use in automated builds to support continuous integration.
-* Use [Eclipse and WDT](/docs/Downloading-WAS-Liberty.md) for development in an IDE with live, incremental updates to your application without restarting the server
-
-## Running on the command line
-
-Based on the server directory generated above, use the following to start the server and run the application:
-
-```bash
-$ export WLP_USER_DIR=/path/to/sample.async.jaxrs/async-jaxrs-wlpcfg
-$ /path/to/wlp/bin/server run jaxrsSample
-```
-
-* `run` runs the server in the foreground.
-* `start` runs the server in the background. Look in the logs directory for console.log to see what's going on, e.g.
-
-```bash
-$ tail -f ${WLP_USER_DIR}/servers/jaxrsSample/logs/console.log
-```
+You can use the [Gradle](#running-with-gradle) or [maven](#running-with-maven) to control and manipulate the server for use in automated builds to support continuous integration.
 
 ## Running with Gradle
 
