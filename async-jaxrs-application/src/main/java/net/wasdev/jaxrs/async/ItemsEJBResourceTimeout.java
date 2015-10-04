@@ -30,17 +30,17 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("ejbitemsTimeout")
-public class ItemsEJBResourceTimeout implements TimeoutHandler{   
+public class ItemsEJBResourceTimeout implements TimeoutHandler{
     @EJB
-    AsycEJB asyncEJB;
-        
+    AsyncEJB asyncEJB;
+
     /**
      * For this example. we've moved the EJB with the @Asynchronous
      * annotation to a class that we call. In order to set a timeout on
      * the AsyncResponse, we need to be able to register the timeout
      * handler before the processing we care about (retrieval of items)
-     * begins. 
-     * 
+     * begins.
+     *
      * @param ar
      */
     @GET
@@ -49,7 +49,7 @@ public class ItemsEJBResourceTimeout implements TimeoutHandler{
         System.out.println("ejbitemsTimeout");
         ar.setTimeout(500, TimeUnit.MILLISECONDS);
         ar.setTimeoutHandler(this);
-        
+
         ar.register(new CompletionCallback() {
             @Override
             public void onComplete(Throwable t) {
@@ -59,7 +59,7 @@ public class ItemsEJBResourceTimeout implements TimeoutHandler{
                 }
             }
         });
-        
+
         ar.register(new ConnectionCallback() {
             @Override
             public void onDisconnect(AsyncResponse ar) {
@@ -69,7 +69,7 @@ public class ItemsEJBResourceTimeout implements TimeoutHandler{
 
         asyncEJB.getItems(ar);
     }
-    
+
     public void handleTimeout(AsyncResponse ar) {
         ar.resume(Response.ok("Backup plan! " + new Item().getId()).build());
     }
