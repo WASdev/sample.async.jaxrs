@@ -14,10 +14,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.0-SNAPSHOT'
-        if (hasProperty('libertyRoot')) {
-            classpath file("${libertyRoot}/bin/tools/ws-server.jar")
-        }
+        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:1.1-SNAPSHOT'
     }
 }
 
@@ -54,8 +51,6 @@ task publishWar(dependsOn: 'jar', type: Copy) {
     into('../async-jaxrs-wlpcfg/servers/jaxrsSample/apps')
 }
 
-assemble.dependsOn('publishWar')
-
 publishing {
     publications {
         mavenWar(MavenPublication) {
@@ -70,7 +65,7 @@ publishing {
 
 // Add a functional test task that runs during the 'check' phase that uses the Liberty Gradle plugin
 // to launch Liberty and run the test classes in the fvt source set
-task fvt(type: Test, dependsOn: jar) {
+task fvt(type: Test, dependsOn: publishWar) {
     group 'Verification'
     description 'Runs the functional verification tests.'
     reports.html.destination = file("$buildDir/reports/fvt")
@@ -78,7 +73,7 @@ task fvt(type: Test, dependsOn: jar) {
     include '**/fvt/**'
     exclude '**/unit/**'
     systemProperties = ['liberty.test.port': getHttpPort()]
-    dependsOn publishWar, libertyStart
+    dependsOn libertyStart
     finalizedBy libertyStop
 }
 
@@ -102,18 +97,22 @@ String getHttpPort() {
     return DEFAULT_HTTP_PORT
 }
 
-libertyStart.mustRunAfter publishWar
-
 liberty {
     wlpDir = owner.hasProperty('libertyRoot') ? "${libertyRoot}" : null
     serverName = 'jaxrsSample'
     userDir = '../async-jaxrs-wlpcfg'
-    // Clean is only supported on the latest Liberty Gradle plugin which isn't on Maven yet
-//    clean = true
+    clean = true
+    install {
+        type = "javaee7"
+    }
 }
 
-if (hasProperty('libertyRoot') && file("${libertyRoot}").exists() && file("${libertyRoot}/lib/ws-launch.jar").exists()) {
-    check.dependsOn fvt
-} else {
-    logger.error('Unable to run integration tests because the libertyRoot property is not set to a directory that contains the /lib/ws-launch.jar file.  Set it in async-jaxrs-application/gradle.properties to your Liberty installation.')
+assemble.dependsOn('publishWar')
+
+// If libertyRoot is not set, automatically download & install Liberty runtime
+if (!hasProperty('libertyRoot')) {
+    fvt.dependsOn('installLiberty')
 }
+
+// Run FVT by default
+check.dependsOn fvt
