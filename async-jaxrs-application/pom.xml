@@ -32,7 +32,7 @@
         <!-- Update this to match the port number in the websocketSample server.xml
         This is needed to run the tests -->
         <libertyTestPort>9081</libertyTestPort>
-        <skipFVT>true</skipFVT>
+        <skipFVT>false</skipFVT>
     </properties>
 
     <dependencyManagement>
@@ -123,21 +123,6 @@
         </dependency>
     </dependencies>
 
-    <pluginRepositories>
-        <!-- Configure Sonatype OSS Maven snapshots repository-->
-        <pluginRepository>
-        <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
-
     <build>
         <plugins>
             <plugin>
@@ -177,7 +162,7 @@
             <plugin>
                 <groupId>net.wasdev.wlp.maven.plugins</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
-                <version>1.1-SNAPSHOT</version>
+                <version>1.1</version>
                 <executions>
                     <execution>
                         <id>start-server</id>
@@ -187,7 +172,6 @@
                         </goals>
                         <configuration>
                             <skip>${skipFVT}</skip>
-                            <configFiles>${basedir}/../async-jaxrs-wlpcfg/servers/jaxrsSample/server.xml</configFiles>
                         </configuration>
                     </execution>
                     <execution>
@@ -202,7 +186,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <installDirectory>${libertyBaseDir}</installDirectory>
                     <serverName>jaxrsSample</serverName>
                     <userDirectory>${basedir}/../async-jaxrs-wlpcfg</userDirectory>
                 </configuration>
@@ -269,17 +252,50 @@
     </build>
     
     <profiles>
+        <!-- Profile to download licensed liberty from the Liberty repository.
+             This profile is active by default. -->
         <profile>
-            <id>check-liberty-present</id>
+            <id>wlp-download</id>
             <activation>
-                <file>
-                    <exists>${libertyRoot}/lib/ws-launch.jar</exists>
-                </file>
+                <property>
+                    <name>!wlp.install.dir</name>
+                </property>
             </activation>
-            <properties>
-                <skipFVT>false</skipFVT>
-                <libertyBaseDir>${libertyRoot}</libertyBaseDir>
-            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                        <artifactId>liberty-maven-plugin</artifactId>
+                        <configuration>
+                            <install>
+                                <type>javaee7</type>
+                            </install>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Profile to use an existing liberty installation. Activate this
+             profile by providing the following property: -Dwlp.install.dir=<value> -->
+        <profile>
+            <id>wlp-local</id>
+            <activation>
+                <property>
+                    <name>wlp.install.dir</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                        <artifactId>liberty-maven-plugin</artifactId>
+                        <configuration>
+                            <installDirectory>${wlp.install.dir}</installDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>

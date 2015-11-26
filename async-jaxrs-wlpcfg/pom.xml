@@ -30,9 +30,9 @@
                             <directory>servers</directory>
                             <followSymlinks>false</followSymlinks>
                             <includes>
-                                <include>**/logs/*</include>
+                                <include>**/logs/**</include>
                                 <include>**/apps/*</include>
-                                <include>**/workarea/*</include>
+                                <include>**/workarea/**</include>
                             </includes>
                         </fileset>
                     </filesets>
