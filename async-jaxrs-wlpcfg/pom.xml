@@ -11,9 +11,9 @@
     </parent>
 
     <artifactId>async-jaxrs-wlpcfg</artifactId>
-    <packaging>pom</packaging>
     <name>WAS Liberty Sample - JAX-RS 2.0 Sample Server Configuration</name>
-    <url>https://wasdev.github.io</url>
+    <packaging>liberty-assembly</packaging>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

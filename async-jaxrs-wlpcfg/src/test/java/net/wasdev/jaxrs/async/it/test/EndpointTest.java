@@ -2,6 +2,7 @@ package net.wasdev.jaxrs.async.it.test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.junit.Test;
@@ -28,7 +29,8 @@ public abstract class EndpointTest {
         String port = System.getProperty("liberty.test.port");
         String url = "http://localhost:" + port + "/jaxrs-async/test/" + endpoint;
         System.out.println("Testing " + url);
-        Response getResponse = client.target(url).request().get();
+        
+        Response getResponse = client.target(url).request().accept(MediaType.APPLICATION_JSON).get();
         String responseString = getResponse.readEntity(String.class);
         System.out.println("Returned " + responseString);
         assertResponseStringCorrect(responseString);
