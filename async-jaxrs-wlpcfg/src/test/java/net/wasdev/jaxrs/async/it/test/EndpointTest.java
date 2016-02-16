@@ -1,4 +1,4 @@
-package net.wasdev.jaxrs.async.fvt.test;
+package net.wasdev.jaxrs.async.it.test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -10,7 +10,7 @@ import org.junit.runners.Parameterized;
 /**
  * <p>This abstract base class will use the {@link Parameterized} JUnit runner to test various endpoints. Subclasses must:</p>
  * <ul>
- * <li>Provide endpoints relative to <code>http://localhost:{port}/jaxrs-async/rest/</code> via a <code>@Parameters</code> annotated method</li>
+ * <li>Provide endpoints relative to <code>http://localhost:{port}/jaxrs-async/test/</code> via a <code>@Parameters</code> annotated method</li>
  * <li>Implement the {@link #assertResponseStringCorrect(String)} template method to check the response string from a given endpoint</li>
  * </ul>
  */
@@ -26,7 +26,7 @@ public abstract class EndpointTest {
     public void testEndpoint() {
         Client client = ClientBuilder.newClient();
         String port = System.getProperty("liberty.test.port");
-        String url = "http://localhost:" + port + "/jaxrs-async/rest/" + endpoint;
+        String url = "http://localhost:" + port + "/jaxrs-async/test/" + endpoint;
         System.out.println("Testing " + url);
         Response getResponse = client.target(url).request().get();
         String responseString = getResponse.readEntity(String.class);
