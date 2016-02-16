@@ -1,6 +1,11 @@
 /.settings/
 /target/
 /.project
+/.factorypath
+/.classpath
+/.apt_generated/
+/build/
+/bin/
 .*.swp
 /servers/*/apps
 /servers/*/logs

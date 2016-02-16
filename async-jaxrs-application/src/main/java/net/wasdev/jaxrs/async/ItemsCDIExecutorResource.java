@@ -45,13 +45,14 @@ public class ItemsCDIExecutorResource {
     @Produces(MediaType.APPLICATION_JSON)
     public void getItems(@Suspended final AsyncResponse ar) {
         System.out.println("cdiexecitems: Submitting to " + executor);
-        executor.submit(new Runnable() {
-            public void run() {
-                Collection<Item> result = itemService.listItems();
-                Response resp = Response.ok(result).build();
-                ar.resume(resp);
-            }
-        });
+        
+        Runnable r = () -> {
+            Collection<Item> result = itemService.listItems();
+            Response resp = Response.ok(result).build();
+            ar.resume(resp);
+        };
+
+        executor.submit(r);
     }
     
     @POST

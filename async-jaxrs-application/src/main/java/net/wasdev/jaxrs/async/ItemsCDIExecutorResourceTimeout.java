@@ -43,6 +43,7 @@ public class ItemsCDIExecutorResourceTimeout {
     @Produces(MediaType.APPLICATION_JSON)
     public void getItems(@Suspended final AsyncResponse ar) {
         System.out.println("cdiexecitems: " + executor);
+        
         ar.setTimeout(500, TimeUnit.MILLISECONDS);
         ar.setTimeoutHandler(new TimeoutHandler() {
             public void handleTimeout(AsyncResponse arg0) {
@@ -67,12 +68,12 @@ public class ItemsCDIExecutorResourceTimeout {
             }
         });
 
-        executor.submit(new Runnable() {
-            public void run() {
-                Collection<Item> result = itemService.listItems();
-                Response resp = Response.ok(result).build();
-                ar.resume(resp);
-            }
-        });
+        Runnable r = () -> {
+            Collection<Item> result = itemService.listItems();
+            Response resp = Response.ok(result).build();
+            ar.resume(resp);
+        };
+        
+        executor.submit(r);
     }
 }

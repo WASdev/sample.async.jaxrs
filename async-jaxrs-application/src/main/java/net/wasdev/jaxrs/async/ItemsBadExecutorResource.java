@@ -16,10 +16,8 @@
 package net.wasdev.jaxrs.async;
 
 import java.util.Collection;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,22 +29,10 @@ import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("execitems")
-public class ItemsExecutorResource {
+@Path("badexecitems")
+public class ItemsBadExecutorResource {
     
     ItemService itemService = new ItemService();
-
-    /**
-     * JNDI lookup for the ManagedExecutorService from EE7 Concurrency
-     * Utilities.
-     * 
-     * @return the default ManagedExecutorService
-     * @throws NamingException
-     */
-    private ExecutorService getExecutor() throws NamingException {
-        return (ExecutorService) new InitialContext()
-                 .lookup("java:comp/DefaultManagedExecutorService");
-    }
     
     /**
      * Use the ManagedExecutorService to queue request processing to a 
@@ -65,13 +51,7 @@ public class ItemsExecutorResource {
             ar.resume(resp);
         };
 
-        try {
-            ExecutorService executor = getExecutor();
-            System.out.println("execitems:  Submitting to " + executor);
-            executor.submit(r);
-        } catch (NamingException e) {
-            r.run();
-        }
+        Executors.newSingleThreadExecutor().submit(r);
     }
     
     @POST
