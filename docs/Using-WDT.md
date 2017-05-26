@@ -41,7 +41,7 @@ This assumes you have the Gradle [Buildship](https://projects.eclipse.org/projec
 4. In the *Project root directory* folder textbox, Paste in the repository directory.
 5. Click *Next* twice
 6. Three projects should be listed in the *Gradle project structure* click *Finish*
-7. This will create 3 projects in Eclipse: sample.async.jaxrs, async-jaxrs-application, and async-jaxrs-wlpcfg
+7. This will create 3 projects in Eclipse: async.jaxrs, async-jaxrs-application, and async-jaxrs-wlpcfg
 8. Go to the *Gradle Tasks* view in Eclipse and navigate to the *sample.async.jaxrs* project
 9. Double click on the *eclipse* task to generate all the Eclipse files
 10. In the *Enterprise Explorer* view in Eclipse right click on the three projects mentioned in step 7 and click refresh
@@ -50,7 +50,7 @@ This assumes you have the Gradle [Buildship](https://projects.eclipse.org/projec
 
 ###### Run Gradle build
 
-1. Right-click on async-websocket/build.gradle
+1. Right-click on async-jaxrs/build.gradle
 2. *Run As > Gradnle Build...*
 3. In the *Gradle Tasks* section enter "build"
 4. Click *Run*
@@ -70,7 +70,7 @@ This assumes you have the Gradle [Buildship](https://projects.eclipse.org/projec
 
 ###### Run Maven install
 
-1. Right-click on async-websocket/pom.xml
+1. Right-click on async-jaxrs/pom.xml
 2. *Run As > Maven build...*
 3. In the *Goals* section enter "install"
 4. Click *Run*
@@ -113,7 +113,7 @@ For the purposes of this sample, we will create the Liberty server (step 3 in th
 1.  Select the `async-jaxrs-application` project
 2.  Right-click -> *Run As... -> Run On Server*
 3.  Select the appropriate server (as created above) and select *Finish*
-4.  Confirm web browser opens on "http://localhost:9081/jaxrs/" with 5 hyperlinks to run samples
+4.  Confirm web browser opens on "http://localhost:9081/jaxrs-async/" with 5 hyperlinks to run samples
 
 :star: *Note:* Some versions of WDT incorrectly map the cdi-1.2 dependency to the CDI 1.0 Facet, which prevents the *Run As ...* operation in step 2 from succeeding. If this happens, Right-click on the `async-jaxrs-application` project, and select *Properties*, then select *Project Facets* in the left-hand pane. Change the the "Context and dependency injection (CDI)" facet to use version 1.2, at which point, step 2 (above) should work.
 
