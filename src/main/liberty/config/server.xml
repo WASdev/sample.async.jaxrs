@@ -12,12 +12,12 @@
     </featureManager>
 
     <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
-    <httpEndpoint httpPort="9081" httpsPort="9444" id="defaultHttpEndpoint"/>
+    <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
 
     <applicationMonitor dropinsEnabled="false" updateTrigger="mbean"/>
     <webContainer deferServletLoad="false"/>
 
     <logging traceSpecification="*=info:com.ibm.ws.jaxrs20.*=all:org.apache.cxf.*=all"/>
 
-    <webApplication id="async-jaxrs-application" location="async-jaxrs-application.war" name="async-jaxrs-application"/>
+    <webApplication id="async-jaxrs" location="async-jaxrs.war" name="async-jaxrs"/>
 </server>

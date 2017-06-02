@@ -20,7 +20,6 @@ This sample contains a few variations to illustrate how to use async request pro
 Browse the code to see what it does, or build and run it yourself:
 * [Building and running on the command line](/docs/Using-cmd-line.md)
 * [Building and running using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
-* [Downloading WAS Liberty](/docs/Downloading-WAS-Liberty.md)
 
 Once the server has been started, go to [http://localhost:9081/jaxrs-async/](http://localhost:9081/jaxrs-async/) to interact with the sample.
 

@@ -14,7 +14,7 @@ import org.junit.runners.Parameterized.Parameters;
  * This tests that the correct timeout message is returned from various endpoints.
  */
 @RunWith(Parameterized.class)
-public class TestTimeouts extends EndpointTest {
+public class TimeoutsIT extends EndpointTest {
 
     /**
      * @return The endpoints that are expected to return a timeout message
@@ -27,7 +27,7 @@ public class TestTimeouts extends EndpointTest {
         return endpoints;
     }
 
-    public TestTimeouts(String endpoint) {
+    public TimeoutsIT(String endpoint) {
         super(endpoint);
     }
 
