@@ -31,7 +31,7 @@ Once the server has been started, go to [http://localhost:9081/jaxrs-async/](htt
 
 ## Notice
 
-© Copyright IBM Corporation 2015.
+© Copyright IBM Corporation 2015, 2017.
 
 ## License
 
