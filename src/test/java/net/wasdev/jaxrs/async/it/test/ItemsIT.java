@@ -23,7 +23,7 @@ import org.junit.runners.Parameterized.Parameters;
  * This tests that two items are returned with an ID from various endpoints.
  */
 @RunWith(Parameterized.class)
-public class TestItems extends EndpointTest {
+public class ItemsIT extends EndpointTest {
 
     /**
      * @return The endpoints that are expected to return a pair of items
@@ -39,7 +39,7 @@ public class TestItems extends EndpointTest {
         return endpoints;
     }
 
-    public TestItems(String endpoint) {
+    public ItemsIT(String endpoint) {
         super(endpoint);
     }
 
