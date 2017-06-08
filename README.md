@@ -4,7 +4,7 @@ Java EE7 added support for asynchronous request processing of REST requests in J
 
 
 This sample contains a few variations to illustrate how to use async request processing in JAX-RS 2.0 applications. It is organized around a generic `Item`, that is manipulated by an `ItemService` that happens to take a long time (it sleeps for a few seconds). Each variation copes with this slow service in a different way, to illustrate how JAX-RS Async requests work and how Concurrency Utilities and EJBs can be used to offload work to other threads while keeping the EE container happy.
-https://github.com/josephca/sample.async.jaxrs/blob/master/src/main/java/net/wasdev/jaxrs/async/ItemsResource.java
+
 * *Items*: [ItemsResource](/src/main/java/net/wasdev/jaxrs/async/ItemsResource.java) uses the `ItemService` to list, add, and fetch items, in the usual (synchronous) way.
 * *Async Items*: [ItemsAsyncResource](/src/main/java/net/wasdev/jaxrs/async/ItemsAsyncResource.java) uses the `@Suspended` annotation with the `AsyncResponse` parameter, however, it is still essentially synchronous, as the work is not offloaded to a different thread.
 * *Async EJB Items*: [ItemsEJBResource](/src/main/java/net/wasdev/jaxrs/async/ItemsEJBResource.java) defines a stateless EJB, which allows work offloading with the addition of the `@Asynchronous` annotation.
