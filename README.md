@@ -1,4 +1,4 @@
-# Java EE7: JAX-RS 2.0 Async Request processing
+# Java EE7: JAX-RS 2.0 Async Request processing [![Build Status](https://travis-ci.org/WASdev/sample.async.jaxrs.svg?branch=master)](https://travis-ci.org/WASdev/sample.async.jaxrs)
 
 Java EE7 added support for asynchronous request processing of REST requests in JAX-RS 2.0.
 
