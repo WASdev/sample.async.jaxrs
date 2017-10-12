@@ -20,7 +20,7 @@ Browse the code to see what it does, or build and run it yourself:
 * [Building and running on the command line](/docs/Using-cmd-line.md)
 * [Building and running using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 
-In your browser, enter the URL for the application: [http://localhost:9080/jaxrs-async/](http://localhost:9080/async-jaxrs/) (where port 9080 assumes the httpEndpoint provided in the sample server.xml has not been modified).
+In your browser, enter the URL for the application: [http://localhost:9081/jaxrs-async/](http://localhost:9081/async-jaxrs/) (where port 9081 assumes the httpEndpoint provided in the sample server.xml has not been modified).
 
 ## More on JAX-RS 2.0 and related technologies      
 * [JSR 339: JAX-RS 2.0](https://jcp.org/en/jsr/detail?id=339)     
