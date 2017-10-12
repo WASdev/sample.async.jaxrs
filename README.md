@@ -1,5 +1,8 @@
 Sample Async JAX-RS 
 ==============
+# Java EE7: JAX-RS 2.0 Async Request processing [![Build Status](https://travis-ci.org/WASdev/sample.async.jaxrs.svg?branch=master)](https://travis-ci.org/WASdev/sample.async.jaxrs)
+
+Java EE7 added support for asynchronous request processing of REST requests in JAX-RS 2.0.
 
 This sample contains a few variations to illustrate how to use async request processing in JAX-RS 2.0 applications. It is organized around a generic `Item`, that is manipulated by an `ItemService` that happens to take a long time (it sleeps for a few seconds). Each variation copes with this slow service in a different way, to illustrate how JAX-RS Async requests work and how Concurrency Utilities and EJBs can be used to offload work to other threads while keeping the EE container happy.
 
@@ -12,8 +15,6 @@ This sample contains a few variations to illustrate how to use async request pro
 `AsyncResponse` objects can be configured to handle timeouts. There are two examples showing that:
 * *Async with CDI-provided Executor and Timeout*: [ItemsCDIExecutorResourceTimeout](/src/main/java/net/wasdev/jaxrs/async/ItemsCDIExecutorResourceTimeout.java) sets a timeout, and registers a timeout handler, a connection callback, and a completion callback. Work is queued to a separate thread via a CDI-injected ManagedExecutorService.
 * *Async EJB Items with Timeout*: [ItemsEJBResourceTimeout](/src/main/java/net/wasdev/jaxrs/async/ItemsEJBResourceTimeout.java) does the same as the previous example, but uses an asynchronous Stateless EJB instead.
-
-
 
 ## Maven
 ### Running in Eclipse with Maven
@@ -32,7 +33,6 @@ Use the following steps to run the application with Maven:
     ```bash
     $ mvn clean install
     ```
-
 2. To run the server with the Spring application execute:
     ```bash
     $ mvn liberty:run-server
@@ -57,6 +57,8 @@ Use the following steps to run the application with Gradle:
     ```bash
     $ gradle clean build
     ```
+=======
+© Copyright IBM Corporation 2015, 2017.
 
 2. To run the server with the Spring application execute:
     ```bash
@@ -67,8 +69,7 @@ Use the following steps to run the application with Gradle:
     ```bash
     $ gradle libertyStop
     ```
- 
-
+    
 In your browser, enter the URL for the application: [http://localhost:9080/jaxrs-async/](http://localhost:9080/async-jaxrs/) (where port 9080 assumes the httpEndpoint provided in the sample server.xml has not been modified).
 In your browser, you should see the phone book displayed.
 
