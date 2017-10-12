@@ -14,18 +14,24 @@ This sample contains a few variations to illustrate how to use async request pro
 * *Async with CDI-provided Executor and Timeout*: [ItemsCDIExecutorResourceTimeout](/src/main/java/net/wasdev/jaxrs/async/ItemsCDIExecutorResourceTimeout.java) sets a timeout, and registers a timeout handler, a connection callback, and a completion callback. Work is queued to a separate thread via a CDI-injected ManagedExecutorService.
 * *Async EJB Items with Timeout*: [ItemsEJBResourceTimeout](/src/main/java/net/wasdev/jaxrs/async/ItemsEJBResourceTimeout.java) does the same as the previous example, but uses an asynchronous Stateless EJB instead.
 
+## Getting Started
+
 Browse the code to see what it does, or build and run it yourself:
 * [Building and running on the command line](/docs/Using-cmd-line.md)
 * [Building and running using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 
 In your browser, enter the URL for the application: [http://localhost:9080/jaxrs-async/](http://localhost:9080/async-jaxrs/) (where port 9080 assumes the httpEndpoint provided in the sample server.xml has not been modified).
-In your browser, you should see the phone book displayed.
 
-# Notice
+## More on JAX-RS 2.0 and related technologies      
+ -* [JSR 339: JAX-RS 2.0](https://jcp.org/en/jsr/detail?id=339)     
+ -* [JSR 166: Concurrency Utilities](https://jcp.org/en/jsr/detail?id=166)      
+ -* [JSR 345: Enterprise JavaBeansTM 3.2](https://jcp.org/en/jsr/detail?id=345)
 
-© Copyright IBM Corporation 2017.
+## Notice
 
-# License
+© Copyright IBM Corporation 2015, 2017.
+
+## License
 
 ```text
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,12 +46,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ````
-
-[Liberty Maven Plug-in]: https://github.com/WASdev/ci.maven
-[Liberty Gradle Plug-in]: https://github.com/WASdev/ci.gradle
-
-[Apache Maven]: http://maven.apache.org
-[Gradle]: https://gradle.org/
-
-[Maven Central]: https://search.maven.org/
-
