@@ -5,7 +5,7 @@ apply plugin: 'liberty'
 group = 'liberty.samples'
 version = '1'
 
-description = """WAS Liberty Sample - JAX-RS 2.0 Asynchronous processing Sample"""
+description = "WAS Liberty Sample - JAX-RS 2.0 Asynchronous processing Sample"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -36,12 +36,11 @@ dependencies {
     testCompile group: 'org.apache.cxf', name: 'cxf-rt-rs-client', version:'3.1.1'
     testCompile group: 'org.glassfish', name: 'javax.json', version:'1.0.4'
     providedCompile group: 'javax', name: 'javaee-api', version:'7.0'
-    libertyRuntime group: 'com.ibm.websphere.appserver.runtime', name: 'wlp-javaee7', version: '17.0.0.1'
-            
+    libertyRuntime group: 'com.ibm.websphere.appserver.runtime', name: 'wlp-javaee7', version: '17.0.0.2'
 }
 
 ext {
-    testServerHttpPort = 9080
+    testServerHttpPort = 9081
     testServerHttpsPort = 9443 
     warContext = 'async-jaxrs'
     packagingType = 'usr'
@@ -93,5 +92,7 @@ task printMessageAboutRunningServer {
     }
 }
 
-
+check.dependsOn 'integrationTest'
+integrationTest.dependsOn 'libertyStart'
+integrationTest.finalizedBy 'libertyStop'
 libertyStart.finalizedBy 'printMessageAboutRunningServer'

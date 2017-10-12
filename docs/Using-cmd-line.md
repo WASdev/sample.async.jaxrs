@@ -1,6 +1,22 @@
-### Running with Maven command-line
+## Building and running the sample using the command line
 
-This project can be built with [Apache Maven]. The project uses [Liberty Maven Plug-in] to automatically download and install the Liberty Java EE 7 Full Platform runtime from [Maven Central]. Liberty Maven Plug-in is also used to create, configure, and run the application on the Liberty server. 
+### Clone Git Repo
+:pushpin: [Switch to Eclipse example](/docs/Using-WDT.md/#clone-git-repo)
+
+```bash
+
+$ git clone https://github.com/WASdev/sample.async.jaxrs.git
+
+```
+
+### Building the sample
+:pushpin: [Switch to Eclipse example](/docs/Using-WDT.md/#building-the-sample-in-eclipse)
+
+This sample can be built using [Maven] or [Gradle].
+
+## Running with Maven command-line
+
+This project can be built with [Maven]. The project uses [Liberty Maven Plug-in] to automatically download and install the Liberty Java EE 7 Full Platform runtime from [Maven Central]. Liberty Maven Plug-in is also used to create, configure, and run the application on the Liberty server. 
 
 Use the following steps to run the application with Maven:
 
@@ -8,12 +24,20 @@ Use the following steps to run the application with Maven:
     ```bash
     $ mvn clean install
     ```
-2. To run the server with the Spring application execute:
+2. To run the server with the JAXRS sample execute:
     ```bash
-    $ mvn liberty:run-server
+    $ mvn liberty:run-server 
+    ```
+    or
+    ```bash
+    $ mvn liberty:start-server
     ```
 
-### Running with Gradle command-line
+* `run-server` runs the server in the foreground.
+* `start-server` runs the server in the background. 
+
+
+## Running with Gradle command-line
 
 This project can be built with [Gradle]. The project uses [Liberty Gradle Plug-in] to automatically download and install Liberty with Java EE 7 Full Platform runtime from [Maven Central]. Liberty Gradle Plug-in is also used to create, configure, and run the application on the Liberty server. 
 
@@ -24,12 +48,12 @@ Use the following steps to run the application with Gradle:
     $ gradle clean build
     ```
     
-2. To run the server with the Spring application execute:
+2. To run the server with the JAXRS application execute:
     ```bash
     $ gradle libertyStart
     ```
         
-3. To stop the server with the Spring application execute:
+3. To stop the server with the JAXRS application execute:
     ```bash
     $ gradle libertyStop
     ```
@@ -37,7 +61,7 @@ Use the following steps to run the application with Gradle:
 [Liberty Maven Plug-in]: https://github.com/WASdev/ci.maven
 [Liberty Gradle Plug-in]: https://github.com/WASdev/ci.gradle
 
-[Apache Maven]: http://maven.apache.org
+[Maven]: http://maven.apache.org
 [Gradle]: https://gradle.org/
 
 [Maven Central]: https://search.maven.org/

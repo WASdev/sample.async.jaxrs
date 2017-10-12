@@ -23,9 +23,9 @@ Browse the code to see what it does, or build and run it yourself:
 In your browser, enter the URL for the application: [http://localhost:9080/jaxrs-async/](http://localhost:9080/async-jaxrs/) (where port 9080 assumes the httpEndpoint provided in the sample server.xml has not been modified).
 
 ## More on JAX-RS 2.0 and related technologies      
- -* [JSR 339: JAX-RS 2.0](https://jcp.org/en/jsr/detail?id=339)     
- -* [JSR 166: Concurrency Utilities](https://jcp.org/en/jsr/detail?id=166)      
- -* [JSR 345: Enterprise JavaBeansTM 3.2](https://jcp.org/en/jsr/detail?id=345)
+* [JSR 339: JAX-RS 2.0](https://jcp.org/en/jsr/detail?id=339)     
+* [JSR 166: Concurrency Utilities](https://jcp.org/en/jsr/detail?id=166)      
+* [JSR 345: Enterprise JavaBeansTM 3.2](https://jcp.org/en/jsr/detail?id=345)
 
 ## Notice
 
