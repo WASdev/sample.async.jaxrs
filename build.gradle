@@ -15,15 +15,10 @@ tasks.withType(JavaCompile) {
 
 buildscript {
     repositories {
-        mavenLocal()
-        maven {
-            name = 'Sonatype Nexus Snapshots'
-            url = 'https://oss.sonatype.org/content/repositories/snapshots/'
-        }
         mavenCentral()
     }
     dependencies {
-        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:2.0-SNAPSHOT'
+        classpath 'net.wasdev.wlp.gradle.plugins:liberty-gradle-plugin:2.0'
     }
 }
 
@@ -87,7 +82,7 @@ task integrationTest(type: Test) {
 
 task printMessageAboutRunningServer {
     doLast {
-        println "The server is now running at http://localhost:${testServerHttpPort}/${warContext}"
+        println "The server is now running at http://localhost:${testServerHttpPort}/jaxrs-async"
         println "To stop the server run 'gradle libertyStop'"
     }
 }
