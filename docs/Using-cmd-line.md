@@ -14,7 +14,7 @@ $ git clone https://github.com/WASdev/sample.async.jaxrs.git
 
 This sample can be built using [Maven] or [Gradle].
 
-## Running with Maven command-line
+## Running with Maven
 
 This project can be built with [Maven]. The project uses [Liberty Maven Plug-in] to automatically download and install the Liberty Java EE 7 Full Platform runtime from [Maven Central]. Liberty Maven Plug-in is also used to create, configure, and run the application on the Liberty server. 
 
@@ -37,7 +37,7 @@ Use the following steps to run the application with Maven:
 * `start-server` runs the server in the background. 
 
 
-## Running with Gradle command-line
+## Running with Gradle
 
 This project can be built with [Gradle]. The project uses [Liberty Gradle Plug-in] to automatically download and install Liberty with Java EE 7 Full Platform runtime from [Maven Central]. Liberty Gradle Plug-in is also used to create, configure, and run the application on the Liberty server. 
 
