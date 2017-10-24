@@ -17,7 +17,7 @@ This sample contains a few variations to illustrate how to use async request pro
 ## Getting Started
 
 Browse the code to see what it does, or build and run it yourself:
-* [Building and running on the command line](/docs/Using-cmd-line.md)
+* [Building and running on the command line using Maven and Gradle](/docs/Using-cmd-line.md)
 * [Building and running using Eclipse and WebSphere Development Tools (WDT)](/docs/Using-WDT.md)
 
 In your browser, enter the URL for the application: [http://localhost:9081/jaxrs-async/](http://localhost:9081/async-jaxrs/) (where port 9081 assumes the httpEndpoint provided in the sample server.xml has not been modified).
