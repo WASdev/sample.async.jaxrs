@@ -51,7 +51,7 @@ This sample can be built using [Maven](#building-with-maven) or [Gradle](#buildi
 
 #### Building with [Gradle](https://gradle.org/)
 
-###### Download the Eclipse Buildship Grab to support Gradle
+###### Download the Eclipse Buildship to support Gradle
 1. Select menu *Help -> Eclipse Marketplace...*
 2. Search for "Buildship Integration 2.0" and install
 
