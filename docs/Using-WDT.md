@@ -27,7 +27,7 @@ If the sample git repository hasn't been cloned yet, WDT has git tools integrate
 ### Building the sample in Eclipse
 :pushpin: [Switch to cmd line example](/docs/Using-cmd-line.md/#building-the-sample)
 
-This sample can be built using [Maven](#building-with-maven).
+This sample can be built using [Maven](#building-with-maven) or [Gradle](#building-with-gradle).
 
 #### Building with [Maven](http://maven.apache.org/)
 
@@ -49,3 +49,29 @@ This sample can be built using [Maven](#building-with-maven).
 
 :star: *Note:* Some versions of WDT incorrectly map the cdi-1.2 dependency to the CDI 1.0 Facet, which prevents the *Run As ...* operation in step 1 from succeeding. If this happens, Right-click on the `async-jaxrs` project, and select *Properties*, then select *Project Facets* in the left-hand pane. Change the the "Context and dependency injection (CDI)" facet to use version 1.2, at which point, step 1 (above) should work.
 
+#### Building with [Gradle](https://gradle.org/)
+
+###### Download the Eclipse Buildship to support Gradle
+1. Select menu *Help -> Eclipse Marketplace...*
+2. Search for "Buildship Integration 2.0" and install
+
+###### Import Gradle projects into WDT
+
+1. In the Git Repository view, expand the sample repo to see the "Working Tree" folder.
+2. Right-click on this folder, and select *Copy path to Clipboard*
+3. Select menu *File -> Import -> Gradle -> Existing Gradle Projects*
+4. In the Root Directory textbox, Paste in the repository directory.
+5. To apply a specific Gradle distribution, click *Next* and configure. Click *Finish* when ready to import the project. By default, Eclipse will use the included Gradle wrapper.
+
+:star: *Note:* If you did not use Eclipse/WDT to clone the git repository, follow from step 3, but navigate to the cloned repository directory rather than pasting its name in step 4. 
+
+###### Running Gradle tasks in Eclipse
+
+:pushpin: [Switch to cmd line example](/docs/Using-cmd-line.md/#running-with-gradle)
+
+1. Everything can be done in the Gradle Tasks view. If you have this view, skip ahead to step 4.
+2. Select menu *Window -> Show View -> Other...*
+3. Navigate to *Gradle Tasks* in the Gradle folder, or type it into the text filter.
+4. Click on *sample.swagger* to expand its grouped tasks.
+5. To run a `gradle build`, click on the `build` task located inside the build group.
+6. To start a server with a `gradle libertyStart`, click on the `libertyStart` task inside the liberty group. 
