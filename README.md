@@ -1,5 +1,8 @@
 # Java EE7: JAX-RS 2.0 Async Request processing [![Build Status](https://travis-ci.org/WASdev/sample.async.jaxrs.svg?branch=master)](https://travis-ci.org/WASdev/sample.async.jaxrs)
 
+**This repository is no longer being maintained and has been archived. It is left for reference and available for use as-is with the advisory that it depends old dependencies which may have security vulnerabilties.**
+
+
 Java EE7 added support for asynchronous request processing of REST requests in JAX-RS 2.0.
 
 This sample contains a few variations to illustrate how to use async request processing in JAX-RS 2.0 applications. It is organized around a generic `Item`, that is manipulated by an `ItemService` that happens to take a long time (it sleeps for a few seconds). Each variation copes with this slow service in a different way, to illustrate how JAX-RS Async requests work and how Concurrency Utilities and EJBs can be used to offload work to other threads while keeping the EE container happy.
